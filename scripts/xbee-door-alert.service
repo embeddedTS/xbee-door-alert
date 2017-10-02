@@ -1,0 +1,9 @@
+[Unit]
+Description=Run XBee Door Alert on startup
+ 
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/xbee-door-alert
+ 
+[Install]
+WantedBy=multi-user.target

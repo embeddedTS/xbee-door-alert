@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /root/xbee-door-alert/
+python xbee-door-alert.py
