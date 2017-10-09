@@ -4,8 +4,8 @@ from email.mime.text import MIMEText
 from xbee import XBee
 
 # Need to be sure to reset the XBee radio socket before starting
-os.system("echo 0 > /sys/class//leds/en-xbee-3v3/brightness")
-os.system("echo 1 > /sys/class//leds/en-xbee-3v3/brightness")
+os.system("echo 0 > /sys/class/leds/en-xbee-3v3/brightness")
+os.system("echo 1 > /sys/class/leds/en-xbee-3v3/brightness")
 
 # Setup the serial port
 serial_port = serial.Serial('/dev/ttymxc7', 57600)
@@ -25,6 +25,7 @@ def send_alert():
 
     gmail_user = config.get('Credentials', 'Username')
     gmail_password = config.get('Credentials', 'Password')
+    to_email = config.get('Email', 'to')
 
     try:  
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
@@ -35,9 +36,9 @@ def send_alert():
 
         msg['Subject'] = "Office Door Opened!"
         msg['From'] = gmail_user
-        msg['To'] = gmail_user
+        msg['To'] = to_email
 
-        server.sendmail(gmail_user, [gmail_user], msg.as_string())
+        server.sendmail(gmail_user, [to_email], msg.as_string())
         server.close()
 
         print "Alert email sent!"
