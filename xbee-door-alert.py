@@ -4,10 +4,12 @@ from email.mime.text import MIMEText
 from xbee import XBee
 
 # Need to be sure to reset the XBee radio socket before starting
+# Specific to TS-7553-V2.  May not be required on other systems.
 os.system("echo 0 > /sys/class/leds/en-xbee-3v3/brightness")
 os.system("echo 1 > /sys/class/leds/en-xbee-3v3/brightness")
 
-# Setup the serial port
+# Setup the serial port. Device name 'ttymxc7' is specific to
+TS-7553-V2. Refer to your board manual.
 serial_port = serial.Serial('/dev/ttymxc7', 57600)
 
 wait = 300 # 5 minutes
